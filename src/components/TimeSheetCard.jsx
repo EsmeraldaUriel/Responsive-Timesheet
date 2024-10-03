@@ -85,7 +85,7 @@ const TimeSheetCard = ({ item, onEdit, onToggleInclude }) => {
       <td className={`px-2 py-2 ${textColor} text-left break-words max-w-[180px]`}>{item.description}</td>
       <td className={`px-2 py-2 ${textColor} text-center max-w-[100px]`}>{item.timeStarted}</td>
       <td className={`px-2 py-2 ${textColor} text-center max-w-[100px]`}>{item.timeEnded}</td>
-      <td className={`px-2 py-2 ${textColor} text-center max-w-[100px]]`}>{calculateDuration(item.timeStarted, item.timeEnded)}</td>
+      <td className={`px-2 py-2 ${textColor} text-center max-w-[100px]`}>{calculateDuration(item.timeStarted, item.timeEnded)}</td>
       <td className={`px-2 py-2 ${textColor} text-center max-w-[120px]`}>{item.withWhom}</td>
       <td className={`px-2 py-2 ${textColor} text-left break-words max-w-[180px]`}>
         {item.deliverables.split(/(https?:\/\/\S+)/).map((part, index) =>

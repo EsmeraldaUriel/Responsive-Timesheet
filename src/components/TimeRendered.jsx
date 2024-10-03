@@ -91,7 +91,7 @@ const TimeRendered = ({ timesheets, currentUserId }) => {
 
   return (
     <div className={`p-2 ${backgroundColor} rounded-lg shadow-md text-center`}>
-      <p className={`${textColor}`}>
+      <p className={`text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl ${textColor}`}>
         {totalHours} : {remainingMinutes.toString().padStart(2, '0')} : 00
       </p>
     </div>

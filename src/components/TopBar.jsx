@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { Menu, MenuItem, IconButton, ListItemIcon } from '@mui/material';
 import { Logout, Person, Settings } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -24,6 +26,7 @@ const TopBar = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [notificationEl, setNotificationEl] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false); // State to manage menu visibility
 
   const handleProfileClick = (event) => setAnchorEl(event.currentTarget);
   const handleNotificationClick = (event) => {
@@ -33,21 +36,34 @@ const TopBar = () => {
 
   const handleProfileClose = () => setAnchorEl(null);
   const handleNotificationClose = () => setNotificationEl(null);
+  const toggleMenu = () => setMenuOpen(!menuOpen); // Toggle menu visibility
 
   return (
     <div className={`bg-${theme === 'light' ? 'white' : 'gray-800'} text-${theme === 'light' ? 'gray-900' : 'white'} py-4 px-6 flex items-center justify-between shadow-md`}>
-      <div className="flex items-center">
-        <h1 className="text-2xl font-bold">Welcome Intern!</h1>
-      </div>
-      <div className="flex items-center space-x-6">
-        {/* Time Rendered */}
-        <div className="flex items-center space-x-4 bg-gray-200 p-2 rounded-lg shadow-md">
-          <div className="flex flex-col font-bold text-center">
-            <span className="text-xs font-bold text-gray-600 pb-1">Time Rendered</span>
-            <TimeRendered timesheets={timesheets} currentUserId={selectedIntern} />
+      {!menuOpen && (
+        <>
+          <div className="flex items-center">
+            <h1 className="text-sm sm:text-xl md:text-xl lg:text-3xl xl:text-4xl font-bold">Welcome Intern!</h1>
           </div>
-        </div>
+          <div className="flex items-center space-x-6">
+            {/* Time Rendered */}
+            <div className="flex items-center space-x-4 bg-gray-200 p-2 rounded-lg shadow-md">
+              <div className="flex flex-col font-bold text-center">
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-gray-600 pb-1">Time Rendered</span>
+                <TimeRendered timesheets={timesheets} currentUserId={selectedIntern} />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {/* Hamburger Menu Icon */}
+      <div className="lg:hidden">
+        <IconButton onClick={toggleMenu}>
+          {menuOpen ? <CloseIcon className={`text-${theme === 'light' ? 'gray-900' : 'white'}`} /> : <MenuIcon className={`text-${theme === 'light' ? 'gray-900' : 'white'}`} />}
+        </IconButton>
+      </div>
 
+      <div className={`flex items-center space-x-6 ${menuOpen ? 'block' : 'hidden'} lg:flex`}>
         {/* Notifications */}
         {notificationsEnabled && (
           <div className="relative">
@@ -55,7 +71,7 @@ const TopBar = () => {
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1">{unreadCount}</span>
             )}
             <IconButton onClick={handleNotificationClick} className="p-0">
-              <NotificationsIcon className={`w-8 h-8 text-${theme === 'light' ? 'gray-900' : 'white'} cursor-pointer transition-transform duration-300 hover:scale-110`} />
+              <NotificationsIcon className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-${theme === 'light' ? 'gray-900' : 'white'} cursor-pointer transition-transform duration-300 hover:scale-110`} />
             </IconButton>
             <Menu
               anchorEl={notificationEl}
@@ -105,15 +121,15 @@ const TopBar = () => {
             <img
               src={profileImageUrl}
               alt="Profile"
-              className="w-12 h-12 rounded-full object-cover cursor-pointer"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full object-cover cursor-pointer"
               onClick={handleProfileClick}
             />
           ) : (
             <div
-              className="w-12 h-12 flex items-center justify-center bg-gray-300 rounded-full cursor-pointer"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-gray-300 rounded-full cursor-pointer"
               onClick={handleProfileClick}
             >
-              <span className="text-gray-800 text-xl">{user?.name?.charAt(0) || 'U'}</span>
+              <span className="text-gray-800 text-sm sm:text-base md:text-xl">{user?.name?.charAt(0) || 'U'}</span>
             </div>
           )}
           <Menu
@@ -147,7 +163,6 @@ const TopBar = () => {
               </ListItemIcon>
               Logout
             </MenuItem>
-
           </Menu>
         </div>
       </div>

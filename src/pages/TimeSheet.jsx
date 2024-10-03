@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import WeekSelectionModal from '../components/WeekSelectionModal';
 import { useNavigate } from 'react-router-dom';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL + 'timesheet';
 const AUTH_USERNAME = import.meta.env.VITE_AUTH_USERNAME;
@@ -36,7 +37,7 @@ const TimesheetHeader = ({ onSelectAll, isAllSelected }) => {
             type="checkbox"
             checked={isAllSelected}
             onChange={onSelectAll}
-            className={`ml-2 ${theme === 'dark' ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'}`}
+            className={`ml-2 sm:ml-4 md:ml-6 lg:ml-8 ${theme === 'dark' ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'}`}
           />
         </th>
       </tr>
@@ -430,29 +431,29 @@ const TimeSheet = () => {
 
   return (
     <Home>
-      <div className={`container mx-auto px-6 py-6 ${theme === 'dark' ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}>
-        <div className="flex justify-between items-center mx-5 mb-5">
-          <label
-            htmlFor="date"
-            className={`block font-medium mr-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}
-          >
-            Filter by Date:
-          </label>
-          <div className="flex-grow">
+      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-6 ${theme === 'dark' ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}>
+        <div className="flex flex-col md:flex-row justify-between items-center mx-2 sm:mx-5 mb-5">
+          <div className="flex flex-col md:flex-row items-center w-full md:w-auto mb-2 md:mb-0">
+            <label
+              htmlFor="date"
+              className={`block font-medium mr-2 mb-2 md:mb-0 text-xs sm:text-xs md:text-xs lg:text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}
+            >
+              Filter by Date:
+            </label>
             <input
               type="date"
               id="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className={`border rounded-lg px-3 py-2 ${theme === 'dark' ? 'bg-gray-800 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
+              className={`border rounded-lg px-1 py-1 sm:px-2 sm:py-2 h-[40px] w-full md:w-auto text-xs sm:text-xs md:text-sm lg:text-base ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
             />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             <select
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
-              className={`mr-2 border rounded-lg px-4 py-2 h-[40px] flex items-center ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
+              className={`border rounded-lg px-2 py-1 sm:px-4 sm:py-2 h-[40px] w-full md:w-auto text-xs sm:text-xs md:text-sm lg:text-base ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
               disabled={!isGroupLeader} // Disable the dropdown if user?.groupLeader is false
             >
               <option value="">All</option>
@@ -467,25 +468,23 @@ const TimeSheet = () => {
               ))}
             </select>
 
-            <div>
-              <select
-                value={selectedIntern || user?.id}
-                onChange={(e) => setSelectedIntern(e.target.value)}
-                className={`mr-2 border rounded-lg px-4 py-2 h-[40px] flex items-center ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
-              >
-                <option value={user?.id}>Select Intern</option>
-                {interns
-                  .filter((intern) => {
-                    if (!selectedTeam) return true; // Show all if no team is selected
-                    return intern.internTeam.includes(selectedTeam); // Check if selectedTeam exists in internTeam array
-                  })
-                  .map((intern) => (
-                    <option key={intern.id} value={intern.id}>
-                      {intern.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            <select
+              value={selectedIntern || user?.id}
+              onChange={(e) => setSelectedIntern(e.target.value)}
+              className={`border rounded-lg px-2 py-1 sm:px-4 sm:py-2 h-[40px] w-full md:w-auto text-xs sm:text-xs md:text-sm lg:text-base ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}
+            >
+              <option value={user?.id}>Select Intern</option>
+              {interns
+                .filter((intern) => {
+                  if (!selectedTeam) return true; // Show all if no team is selected
+                  return intern.internTeam.includes(selectedTeam); // Check if selectedTeam exists in internTeam array
+                })
+                .map((intern) => (
+                  <option key={intern.id} value={intern.id}>
+                    {intern.name}
+                  </option>
+                ))}
+            </select>
 
             <button
               onClick={() => {
@@ -495,21 +494,24 @@ const TimeSheet = () => {
                   setIsWeekSelectionModalOpen(true);
                 }
               }}
-              className={`${isProceedToPDF ? 'bg-green-500' : 'bg-red-500'} text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-red-600 transition-colors duration-300`}
+              className={`${isProceedToPDF ? 'bg-green-500' : 'bg-red-500'} text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-red-600 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg`}
             >
-              {isProceedToPDF ? 'Proceed to PDF' : 'Generate PDF'}
+              <span className="hidden lg:inline">{isProceedToPDF ? 'Proceed to PDF' : 'Generate PDF'}</span>
+              <span className="lg:hidden">
+                <PictureAsPdfIcon className="text-xs sm:text-sm md:text-sm lg:text-lg" />
+              </span>
             </button>
 
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-300"
+              className="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg"
             >
-              <AddIcon />
-              Add Timesheet
+              <AddIcon className="text-xs sm:text-sm md:text-base lg:text-lg" />
+              <span className="hidden lg:inline text-xs sm:text-sm md:text-base lg:text-lg">Add Timesheet</span>
             </button>
           </div>
         </div>
-
+  
         <div className="mt-8 mb-8 overflow-auto h-[calc(76vh-100px)]">
           <table className="min-w-full bg-gray-50 border border-gray-200">
             <TimesheetHeader
@@ -518,7 +520,7 @@ const TimeSheet = () => {
               onWeekSelect={handleWeekSelect}
               selectedWeek={selectedWeek}
             />
-
+  
             <tbody>
               {Object.keys(groupedTimesheets).length === 0 ? (
                 <tr>
@@ -538,7 +540,7 @@ const TimeSheet = () => {
             </tbody>
           </table>
         </div>
-
+  
         {isWeekSelectionModalOpen && (
           <WeekSelectionModal
             isOpen={isWeekSelectionModalOpen}
@@ -546,7 +548,7 @@ const TimeSheet = () => {
             onSelect={handleWeekSelect}
           />
         )}
-
+  
         {isModalOpen && (
           <AddTimesheetModal
             isOpen={isModalOpen}
@@ -574,7 +576,7 @@ const TimeSheet = () => {
             setNewComment2={setNewComment2} // Pass the setter for Comment 2
           />
         )}
-
+  
         {isEditModalOpen && (
           <EditTimesheetModal
             isOpen={isEditModalOpen}

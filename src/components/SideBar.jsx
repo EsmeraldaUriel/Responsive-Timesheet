@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { Announcement, Dashboard, Folder, GridOn, PeopleAlt, Task } from '@mui/icons-material';
 import iDashLogo from '../assets/IDashLogo.png';
+import iDashLogoMobile from '../assets/IDashLogoMobile.png'; // Import the mobile logo
 import axios from 'axios';
-
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const authUsername = import.meta.env.VITE_AUTH_USERNAME;
@@ -49,7 +49,16 @@ const SideBar = () => {
       {/* Logo */}
       <div className="flex justify-center mb-8">
         <NavLink to="/">
-          <img src={iDashLogo} alt="Logo" className="w-40 h-50 cursor-pointer" />
+          <img
+            src={iDashLogo}
+            alt="Logo"
+            className="hidden sm:block w-40 h-50 cursor-pointer"
+          />
+          <img
+            src={iDashLogoMobile}
+            alt="Mobile Logo"
+            className="block sm:hidden w-20 h-25 cursor-pointer"
+          />
         </NavLink>
       </div>
 
@@ -67,7 +76,7 @@ const SideBar = () => {
       <div className="flex justify-center mt-auto text-center">
         <NavLink
           to="/settings?selectedSection=updates"
-          className={`text-md text-gray-600 font-medium ${navItemTextColor} hover:text-blue-500`}
+          className={`text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl text-gray-600 font-medium ${navItemTextColor} hover:text-blue-500`}
         >
           {`version ${latestVersion}`}
         </NavLink>
@@ -85,7 +94,7 @@ const NavItem = ({ icon, label, path, navItemBgColor, navItemTextColor }) => (
     style={{ color: navItemTextColor }}
   >
     <span className="text-xl mr-2">{icon}</span>
-    <span>{label}</span>
+    <span className="hidden sm:inline md:inline text-[10px] md:text-[10px] lg:text-base xl:text-lg 2xl:text-xl">{label}</span>
   </NavLink>
 );
 
