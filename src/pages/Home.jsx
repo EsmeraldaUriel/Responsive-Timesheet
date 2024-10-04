@@ -21,10 +21,10 @@ function Home({ children }) {
         <div className="w-[17%] h-full fixed" style={{ backgroundColor: sidebarBgColor }}>
           <SideBar />
           <button
-            className="absolute top-2 right-[-12px] z-50 p-0 bg-gray-700 text-white rounded-full"
+            className="absolute top-2 right-[-12px] z-50 p-1 sm:p-2 md:p-3 lg:p-4 bg-gray-700 text-white rounded-full"
             onClick={() => setIsSidebarVisible(false)}
           >
-            <ChevronLeft />
+            <ChevronLeft className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" />
           </button>
         </div>
       )}
@@ -32,10 +32,10 @@ function Home({ children }) {
       {/* Toggle Button */}
       {!isSidebarVisible && (
         <button
-          className="fixed top-2 left-1 z-50 p-0 bg-gray-700 text-white rounded-full"
+          className="fixed top-2 left-1 z-50 p-1 sm:p-2 md:p-3 lg:p-4 bg-gray-700 text-white rounded-full"
           onClick={() => setIsSidebarVisible(true)}
         >
-          <ChevronRight />
+          <ChevronRight className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl" />
         </button>
       )}
 
