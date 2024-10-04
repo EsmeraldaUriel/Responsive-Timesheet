@@ -15,7 +15,7 @@ const SideBar = () => {
   const { theme } = useTheme(); // Use theme from context
   const [latestVersion, setLatestVersion] = useState(''); // State to store the latest version
 
-  const sidebarBgColor = theme === 'light' ? '#DBEDFF' : '#1F2937'; // Light or dark background
+  const sidebarBgColor = theme === 'light' ? '#DBEFF' : '#1F2937'; // Light or dark background
   const navItemBgColor = theme === 'light' ? '#D9D0D0' : '#2D3748'; // Light or dark background for active item
   const navItemTextColor = theme === 'light' ? '#000000' : '#FFFFFF'; // Light or dark text color
 
@@ -63,7 +63,7 @@ const SideBar = () => {
       </div>
 
       {/* Navigation Items */}
-      <nav className="flex flex-col text-[17px] font-semibold space-y-7 flex-grow">
+      <nav className="flex flex-col text-[17px] font-semibold space-y-6 flex-grow">
         <NavItem icon={<Dashboard />} label="Dashboard" path="/" navItemBgColor={navItemBgColor} navItemTextColor={navItemTextColor} />
         <NavItem icon={<Announcement />} label="Announcement" path="/announcement" navItemBgColor={navItemBgColor} navItemTextColor={navItemTextColor} />
         <NavItem icon={<GridOn />} label="Timesheet" path="/timesheet" navItemBgColor={navItemBgColor} navItemTextColor={navItemTextColor} />

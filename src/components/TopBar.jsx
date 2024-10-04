@@ -43,7 +43,7 @@ const TopBar = () => {
       {!menuOpen && (
         <>
           <div className="flex items-center">
-            <h1 className="text-sm sm:text-xl md:text-xl lg:text-3xl xl:text-4xl font-bold">Welcome Intern!</h1>
+            <h1 className="text-sm sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Welcome Intern!</h1>
           </div>
           <div className="flex items-center space-x-6">
             {/* Time Rendered */}

@@ -486,29 +486,31 @@ const TimeSheet = () => {
                 ))}
             </select>
 
-            <button
-              onClick={() => {
-                if (isProceedToPDF) {
-                  navigate('/weekly'); // Redirect to the weekly page
-                } else {
-                  setIsWeekSelectionModalOpen(true);
-                }
-              }}
-              className={`${isProceedToPDF ? 'bg-green-500' : 'bg-red-500'} text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-red-600 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg`}
-            >
-              <span className="hidden lg:inline">{isProceedToPDF ? 'Proceed to PDF' : 'Generate PDF'}</span>
-              <span className="lg:hidden">
-                <PictureAsPdfIcon className="text-xs sm:text-sm md:text-sm lg:text-lg" />
-              </span>
-            </button>
+            <div className="flex flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => {
+                  if (isProceedToPDF) {
+                    navigate('/weekly'); // Redirect to the weekly page
+                  } else {
+                    setIsWeekSelectionModalOpen(true);
+                  }
+                }}
+                className={`${isProceedToPDF ? 'bg-green-500' : 'bg-red-500'} text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-red-600 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg`}
+              >
+                <span className="hidden lg:inline">{isProceedToPDF ? 'Proceed to PDF' : 'Generate PDF'}</span>
+                <span className="lg:hidden">
+                  <PictureAsPdfIcon className="text-xs sm:text-sm md:text-sm lg:text-lg" />
+                </span>
+              </button>
 
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg"
-            >
-              <AddIcon className="text-xs sm:text-sm md:text-base lg:text-lg" />
-              <span className="hidden lg:inline text-xs sm:text-sm md:text-base lg:text-lg">Add Timesheet</span>
-            </button>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-300 text-xs sm:text-sm md:text-sm lg:text-lg"
+              >
+                <AddIcon className="text-xs sm:text-sm md:text-base lg:text-lg" />
+                <span className="hidden lg:inline text-xs sm:text-sm md:text-base lg:text-lg">Add Timesheet</span>
+              </button>
+            </div>
           </div>
         </div>
   
